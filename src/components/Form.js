@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Button from './Button.js';
 import Star from './Star.js';
 
 class Form extends Component {
@@ -45,9 +46,7 @@ class Form extends Component {
                     </button>
                 </form>
 
-                <button className={this.state.isActive ? 'button hide' : 'button'} onClick={() => this.showForm()}>
-                    Schrijf een review
-                </button>
+                {this.showButton()}
 
             </div>
         )
@@ -55,7 +54,12 @@ class Form extends Component {
 
     showForm()
     {
-        this.setState({isActive: true});
+        this.setState({...this.state, isActive: true});
+    }
+
+    showButton()
+    {
+        return <Button isActive={this.state.isActive} showForm={() => this.showForm()}/>;
     }
 
     getStar(rating)
@@ -69,7 +73,7 @@ class Form extends Component {
 
     clickOnStar(rating)
     {
-        this.setState({rating: rating});
+        this.setState({...this.state, rating: rating});
     }
 
     handleInputChange(event)
@@ -78,7 +82,7 @@ class Form extends Component {
         const value = target.value;
         const name = target.name;
 
-        this.setState({[name]: value})
+        this.setState({...this.state, [name]: value})
     }
 }
 

@@ -31,7 +31,7 @@ class App extends Component {
     componentWillMount()
     {
         this.setState({
-            averageRating: this.getAverageRating(this.state.reviews)
+            ...this.state, averageRating: this.getAverageRating(this.state.reviews)
         });
     }
 
@@ -95,6 +95,7 @@ class App extends Component {
         });
 
         this.setState({
+            ...this.state,
             reviews: reviews,
             averageRating: this.getAverageRating(reviews)
         });

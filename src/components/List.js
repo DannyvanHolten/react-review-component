@@ -6,11 +6,7 @@ class List extends Component {
     {
         return (
             <ul className="reviews__list">
-                {this.props.reviews.sort((a,b) => b.date - a.date).map(function (review, index)
-                    {
-                        return <Review index={index} review={review}/>;
-                    }
-                )}
+                {this.props.reviews.sort((a,b) => b.date - a.date).map((review, index) => <Review index={index} review={review}/>)}
             </ul>
         );
     }
