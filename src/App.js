@@ -22,7 +22,8 @@ class App extends Component {
                     review: 'Curabitur blandit mollis lacus. Curabitur suscipit suscipit tellus. Phasellus tempus.\n\n Quisque rutrum. Nulla sit amet est. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci.',
                     date: new Date()
                 }
-            ]
+            ],
+            validation: ''
         };
 
         this.submitForm = this.submitForm.bind(this);
@@ -79,13 +80,27 @@ class App extends Component {
 
     renderForm()
     {
-        return <Form submitForm={this.submitForm}/>;
+        return <Form submitForm={this.submitForm} validation={this.state.validation}/>;
     }
 
     submitForm(event)
     {
         event.preventDefault();
         const reviews = this.state.reviews.slice();
+
+        if(event.target.rating.value === '' || event.target.name.value === '' || event.target.review.value === '') {
+            this.setState({
+                ...this.state,
+                validation: <div className="validation">Niet alle velden zijn ingevuld</div>
+            });
+
+            return;
+        }
+
+        this.setState({
+            ...this.state,
+            validation: ''
+        });
 
         reviews.push({
             rating: parseInt(event.target.rating.value),
@@ -97,7 +112,8 @@ class App extends Component {
         this.setState({
             ...this.state,
             reviews: reviews,
-            averageRating: this.getAverageRating(reviews)
+            averageRating: this.getAverageRating(reviews),
+            validation: ''
         });
     }
 

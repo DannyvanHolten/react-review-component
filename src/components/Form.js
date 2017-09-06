@@ -25,6 +25,7 @@ class Form extends Component {
 
                 <form className={this.state.isActive ? '' : 'hide'} onSubmit={this.props.submitForm}>
 
+                    {this.props.validation}
                     <div className="rating">
                         <span className="rating__prefix font-size-small">Beoordeling</span>
                         {this.getStar(1)}
